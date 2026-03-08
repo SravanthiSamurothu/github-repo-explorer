@@ -4,7 +4,7 @@ import { useState } from "react";
 
 export default function SearchBar() {
   const [username, setUsername] = useState("");
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<any>(null);
 
   const handleSearch = async () => {
     if (!username) return;
