@@ -63,10 +63,29 @@ export default function SearchBar() {
           <h2 className="text-xl font-bold mb-2 text-center">Repositories</h2>
 
           {repos.map((repo: any) => (
-            <div key={repo.id} className="border p-2 rounded mb-2">
-              {repo.name}
-            </div>
-          ))}
+  <div key={repo.id} className="border p-4 rounded mb-3">
+
+    <h3 className="font-bold text-lg">{repo.name}</h3>
+
+    <p className="text-sm text-gray-600">
+      {repo.description || "No description available"}
+    </p>
+
+    <div className="flex justify-between text-sm mt-2">
+      <span>⭐ {repo.stargazers_count}</span>
+      <span>{repo.language}</span>
+    </div>
+
+    <a
+      href={repo.html_url}
+      target="_blank"
+      className="text-blue-500 text-sm"
+    >
+      View Repository
+    </a>
+
+  </div>
+))}
         </div>
       )}
 
