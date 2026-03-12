@@ -9,7 +9,7 @@ export default function SearchBar() {
 
   const handleSearch = async () => {
     if (!username) return;
-
+//fetch github user profile and repos
     const response = await fetch(`https://api.github.com/users/${username}`);
     const data = await response.json();
     setUser(data);
