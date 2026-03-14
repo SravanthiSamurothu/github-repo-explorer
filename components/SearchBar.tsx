@@ -3,15 +3,23 @@
 import { useState } from "react";
 
 export default function SearchBar() {
+  const [error, setError] = useState("");
   const [username, setUsername] = useState("");
   const [user, setUser] = useState<any>(null);
   const [repos, setRepos] = useState<any[]>([]);
 
   const handleSearch = async () => {
+    setError("");
     if (!username) return;
 //fetch github user profile and repos
     const response = await fetch(`https://api.github.com/users/${username}`);
     const data = await response.json();
+    if (data.message === "Not Found") {
+        setError("User not found");
+        setUser(null);
+        setRepos([]);
+        return;
+    }
     setUser(data);
 
     const repoResponse = await fetch(`https://api.github.com/users/${username}/repos`);
@@ -41,6 +49,7 @@ export default function SearchBar() {
       </div>
 
       {/* User Profile */}
+      {error && <p className="text-red-500">{error}</p>}
       {user && (
         <div className="text-center border p-4 rounded">
           <img
