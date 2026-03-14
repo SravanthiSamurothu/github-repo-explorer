@@ -75,7 +75,7 @@ export default function SearchBar() {
         <div className="mt-6 w-full max-w-md">
           <h2 className="text-xl font-bold mb-2 text-center">Repositories</h2>
 
-          {repos.map((repo: any) => (
+          {repos.slice(0,10).map((repo: any) => (
   <div key={repo.id} className="border p-4 rounded mb-3">
 
     <h3 className="font-bold text-lg">{repo.name}</h3>
