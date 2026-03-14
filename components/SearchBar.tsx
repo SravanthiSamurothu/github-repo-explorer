@@ -3,12 +3,14 @@
 import { useState } from "react";
 
 export default function SearchBar() {
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [username, setUsername] = useState("");
   const [user, setUser] = useState<any>(null);
   const [repos, setRepos] = useState<any[]>([]);
 
   const handleSearch = async () => {
+    setLoading(true);
     setError("");
     if (!username) return;
 //fetch github user profile and repos
@@ -25,6 +27,7 @@ export default function SearchBar() {
     const repoResponse = await fetch(`https://api.github.com/users/${username}/repos`);
     const repoData = await repoResponse.json();
     setRepos(repoData);
+    setLoading(false);
   };
 
   return (
@@ -49,6 +52,7 @@ export default function SearchBar() {
       </div>
 
       {/* User Profile */}
+      {loading && <p className="text-blue-500">Loading...</p>}
       {error && <p className="text-red-500">{error}</p>}
       {user && (
         <div className="text-center border p-4 rounded">
